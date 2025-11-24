@@ -1,0 +1,31 @@
+{
+    "rewrites": [
+        {
+            "source": "/app",
+            "destination": "/painscout/app.py"
+        },
+        {
+            "source": "/app/(.*)",
+            "destination": "/painscout/app.py"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/landing/index.html"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                }
+            ]
+        }
+    ]
+}

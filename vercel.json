@@ -1,41 +1,13 @@
 {
-    "builds": [
-        {
-            "src": "landing/index.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "painscout/app.py",
-            "use": "@vercel/python"
-        }
-    ],
     "rewrites": [
-        {
-            "source": "/app",
-            "destination": "/painscout/app.py"
-        },
-        {
-            "source": "/app/(.*)",
-            "destination": "/painscout/app.py"
-        },
         {
             "source": "/(.*)",
             "destination": "/landing/index.html"
         }
     ],
-    "headers": [
-        {
-            "source": "/(.*)",
-            "headers": [
-                {
-                    "key": "X-Frame-Options",
-                    "value": "DENY"
-                },
-                {
-                    "key": "X-Content-Type-Options",
-                    "value": "nosniff"
-                }
-            ]
+    "functions": {
+        "painscout/app.py": {
+            "maxDuration": 10
         }
-    ]
+    }
 }

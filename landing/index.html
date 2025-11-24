@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PainScout.ai — Discover Pain Points</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .grain::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: .08;
+            mix-blend-mode: screen;
+        }
+
+        .typewriter span::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#050718] text-white grain overflow-x-hidden">
+    <div class="fixed inset-0 bg-gradient-to-br from-[#0f172a] via-[#050718] to-black opacity-90 pointer-events-none">
+    </div>
+    <div
+        class="fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(41,98,255,0.25),_transparent_55%)] pointer-events-none">
+    </div>
+
+    <div class="relative min-h-screen overflow-hidden">
+        <div class="absolute inset-0" x-data x-init="
+      const canvas = $el, ctx = canvas.getContext('2d');
+      const particles = Array.from({length: 80}, () => ({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.5+0.5,
+        d: Math.random()*1,
+      }));
+      function draw(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p=>{
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle='rgba(255,255,255,0.15)';
+          ctx.fill();
+          p.y += p.d * 0.3;
+          if(p.y>canvas.height) p.y = -10;
+        });
+        requestAnimationFrame(draw);
+      }
+      function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+      resize(); draw(); window.addEventListener('resize', resize);
+    " width="1200" height="800"></div>
+
+        <header class="relative z-10 mx-auto max-w-6xl px-6 md:px-12 py-10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#00D4FF] to-[#2962FF] flex items-center justify-center shadow-lg shadow-cyan-500/40">
+                    <span class="text-2xl">🧭</span>
+                </div>
+                <div>
+                    <p class="text-xl font-semibold">PainScout.ai</p>
+                    <p class="text-sm text-slate-400">Signal Intelligence for SaaS Builders</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm text-slate-300">
+                <a href="#features" class="hover:text-white transition">Features</a>
+                <a href="#signals" class="hover:text-white transition">Signals</a>
+                <a href="#pricing" class="hover:text-white transition">Pricing</a>
+            </nav>
+            <a href="#cta"
+                class="hidden md:inline-flex px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">Get Early
+                Access</a>
+        </header>
+
+        <main class="relative z-10">
+            <!-- HERO -->
+            <section class="px-6 md:px-12 lg:px-16 pt-16 pb-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                    <div>
+                        <p class="text-sm uppercase tracking-[0.4em] text-cyan-400 mb-4">B2B PAIN INTELLIGENCE</p>
+                        <div class="typewriter text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                            x-data="{ words: ['Discover unmet needs.', 'Build what customers beg for.', 'Ship revenue-ready features.'], current: 0 }"
+                            x-init="setInterval(() => { current = (current + 1) % words.length }, 2600)">
+                            <span x-text="words[current]"></span>
+                        </div>
+                        <p class="text-lg text-slate-300 mb-8 max-w-2xl">PainScout.ai scans Reddit & X for the last 60
+                            days, extracts real SaaS pain points, ranks them by urgency, and delivers founder-ready
+                            intelligence in 48 hours.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                            <a id="cta" href="https://calendly.com/" target="_blank"
+                                class="group relative inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-base bg-gradient-to-r from-[#2962FF] to-[#00D4FF] shadow-lg shadow-cyan-500/40 overflow-hidden">
+                                <span
+                                    class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-white/20"></span>
+                                <span>Get Early Access</span>
+                                <svg class="ml-3 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <button
+                                class="px-6 py-3 rounded-full border border-white/20 text-slate-300 hover:text-white hover:border-white/40 transition">See
+                                Live Signals</button>
+                        </div>
+                        <div class="grid max-w-md grid-cols-2 gap-6 text-center">
+                            <div class="rounded-2xl border border-white/5 bg-white/5 backdrop-blur-lg py-5 px-4"
+                                x-data="{ count: 0 }"
+                                x-intersect.once="const i=setInterval(()=>{ count+=156; if(count>=12492){count=12492; clearInterval(i);} },30)">
+                                <p class="text-sm text-slate-400 mb-2">Sources monitored</p>
+                                <p class="text-3xl font-bold text-white" x-text="count.toLocaleString()"></p>
+                            </div>
+                            <div class="rounded-2xl border border-white/5 bg-white/5 backdrop-blur-lg py-5 px-4"
+                                x-data="{ signal: 0 }"
+                                x-intersect.once="const i=setInterval(()=>{ signal+=10; if(signal>=847){signal=847; clearInterval(i);} },40)">
+                                <p class="text-sm text-slate-400 mb-2">High intent signals</p>
+                                <p class="text-3xl font-bold text-cyan-300" x-text="signal"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-2xl p-6 shadow-2xl shadow-black/40 space-y-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-slate-400">Next scan</p>
+                                <p class="text-xl font-semibold text-white mt-1">6h 24m</p>
+                            </div>
+                            <span class="px-4 py-1 rounded-full text-xs font-semibold bg-white/10">Live feed</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <p class="text-sm text-cyan-300 mb-1">r/SaaS • High urgency</p>
+                                <p class="font-semibold text-lg">“Need a tool that auto-syncs Stripe refunds into
+                                    NetSuite without manual CSV uploads.”</p>
+                                <div class="flex justify-between mt-3 text-sm text-slate-400">
+                                    <span>Frustration: 9/10</span>
+                                    <a href="#" class="text-cyan-300">View ↗</a>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <p class="text-sm text-pink-300 mb-1">X Signal • Trending</p>
+                                <p class="font-semibold text-lg">“Why does Salesforce still make me build every
+                                    automation from scratch? Need a no-code layer.”</p>
+                                <div class="flex justify-between mt-3 text-sm text-slate-400">
+                                    <span>Frustration: 8/10</span>
+                                    <a href="#" class="text-cyan-300">View ↗</a>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <p class="text-sm text-orange-300 mb-1">r/startups • SaaS CEO</p>
+                                <p class="font-semibold text-lg">“Wish there was a proper two-way sync between Notion
+                                    tasks and Linear issues.”</p>
+                                <div class="flex justify-between mt-3 text-sm text-slate-400">
+                                    <span>Frustration: 7/10</span>
+                                    <a href="#" class="text-cyan-300">View ↗</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm text-slate-400">
+                            <span>Dataset updated 2m ago</span>
+                            <span>Powered by Gemini + custom heuristics</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FEATURES -->
+            <section id="features" class="px-6 md:px-12 lg:px-16 py-16">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex items-center gap-3 mb-10">
+                        <span
+                            class="h-8 w-8 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center">✦</span>
+                        <p class="text-sm tracking-[0.4em] uppercase text-slate-400">Why PainScout.ai</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="rounded-3xl bg-white/5 border border-white/10 p-6 hover:-translate-y-1 transition">
+                            <div
+                                class="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#00D4FF] to-[#2962FF] flex items-center justify-center shadow shadow-cyan-500/40 mb-4">
+                                ⚡</div>
+                            <h3 class="text-xl font-semibold mb-3">Automated Scans</h3>
+                            <p class="text-slate-400 text-sm">Daily Reddit & X sweeps detect “I hate when...” hot takes
+                                without the doomscrolling.</p>
+                        </div>
+                        <div class="rounded-3xl bg-white/5 border border-white/10 p-6 hover:-translate-y-1 transition">
+                            <div
+                                class="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#FF6B6B] to-[#FF8E53] flex items-center justify-center shadow shadow-rose-500/40 mb-4">
+                                🧠</div>
+                            <h3 class="text-xl font-semibold mb-3">AI Pain Analysis</h3>
+                            <p class="text-slate-400 text-sm">Gemini + heuristics extract category, persona, and
+                                frustration score for every signal.</p>
+                        </div>
+                        <div class="rounded-3xl bg-white/5 border border-white/10 p-6 hover:-translate-y-1 transition">
+                            <div
+                                class="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#4ADE80] to-[#22D3EE] flex items-center justify-center shadow shadow-emerald-500/40 mb-4">
+                                📈</div>
+                            <h3 class="text-xl font-semibold mb-3">Founder-Ready Reports</h3>
+                            <p class="text-slate-400 text-sm">Download PDF + CSV, share with PMs, and build the feature
+                                customers are begging for.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SAMPLE PAINS -->
+            <section id="signals" class="px-6 md:px-12 lg:px-16 py-20">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex items-center gap-3 mb-10">
+                        <span
+                            class="h-8 w-8 rounded-full bg-rose-500/20 text-rose-300 flex items-center justify-center">🔥</span>
+                        <p class="text-sm tracking-[0.4em] uppercase text-slate-400">Live Pain Signals</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div
+                            class="rounded-3xl bg-gradient-to-b from-white/8 to-white/2 border border-white/10 p-6 backdrop-blur">
+                            <p class="text-sm text-cyan-300 mb-2">X • FinTech Founder</p>
+                            <h4 class="text-lg font-semibold mb-3">“Trying to reconcile multi-currency Stripe payouts
+                                manually is pure pain.”</h4>
+                            <div class="flex justify-between text-sm text-slate-400">
+                                <span>Frustration: <strong class="text-white">9/10</strong></span>
+                                <span>Engagement: 189</span>
+                            </div>
+                        </div>
+                        <div
+                            class="rounded-3xl bg-gradient-to-b from-white/8 to-white/2 border border-white/10 p-6 backdrop-blur">
+                            <p class="text-sm text-cyan-300 mb-2">r/SaaS • Ops Lead</p>
+                            <h4 class="text-lg font-semibold mb-3">“Wish there was a tool that synced our HubSpot deals
+                                into Notion dashboards.”</h4>
+                            <div class="flex justify-between text-sm text-slate-400">
+                                <span>Frustration: <strong class="text-white">8/10</strong></span>
+                                <span>Comments: 47</span>
+                            </div>
+                        </div>
+                        <div
+                            class="rounded-3xl bg-gradient-to-b from-white/8 to-white/2 border border-white/10 p-6 backdrop-blur">
+                            <p class="text-sm text-cyan-300 mb-2">X • Sales Leader</p>
+                            <h4 class="text-lg font-semibold mb-3">“Cold email deliverability is tanking. Need AI that
+                                rewrites sequences on the fly.”</h4>
+                            <div class="flex justify-between text-sm text-slate-400">
+                                <span>Frustration: <strong class="text-white">7/10</strong></span>
+                                <span>Retweets: 63</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRICING -->
+            <section id="pricing" class="px-6 md:px-12 lg:px-16 py-16 bg-white/5 border-t border-white/10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex items-center gap-3 mb-12">
+                        <span
+                            class="h-8 w-8 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center">💎</span>
+                        <p class="text-sm tracking-[0.4em] uppercase text-slate-200">Founder-Friendly Pricing</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-8">
+                            <p class="text-sm uppercase tracking-[0.4em] text-slate-300 mb-4">Starter</p>
+                            <p class="text-4xl font-bold mb-4">$49<span
+                                    class="text-base text-slate-400 font-normal">/mo</span></p>
+                            <ul class="space-y-3 text-slate-300 mb-6">
+                                <li>• Weekly scans of Reddit + X</li>
+                                <li>• 50 signals per report</li>
+                                <li>• PDF + CSV exports</li>
+                                <li>• Email delivery</li>
+                            </ul>
+                            <a href="https://calendly.com/"
+                                class="inline-flex w-full items-center justify-center rounded-2xl border border-white/20 py-3 text-white hover:bg-white/10 transition">
+                                Start with Starter
+                            </a>
+                        </div>
+                        <div
+                            class="rounded-3xl border border-cyan-400/30 bg-gradient-to-b from-[#00D4FF]/20 to-[#050718] p-8 shadow-lg shadow-cyan-500/20">
+                            <p class="text-sm uppercase tracking-[0.4em] text-cyan-300 mb-4 flex items-center gap-2">
+                                Pro <span class="px-2 py-0.5 text-xs rounded-full bg-white/10">Most Popular</span>
+                            </p>
+                            <p class="text-4xl font-bold mb-4">$99<span
+                                    class="text-base text-slate-300 font-normal">/mo</span></p>
+                            <ul class="space-y-3 text-slate-200 mb-6">
+                                <li>• Daily scans + alerting</li>
+                                <li>• 200+ verified signals</li>
+                                <li>• AI-written executive summary</li>
+                                <li>• Founder concierge + Miro board</li>
+                            </ul>
+                            <a href="https://calendly.com/" target="_blank"
+                                class="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#2962FF] to-[#00D4FF] py-3 font-semibold hover:opacity-95 transition">
+                                Talk to the Team
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="px-6 md:px-12 lg:px-16 py-20">
+                <div
+                    class="max-w-5xl mx-auto text-center rounded-[32px] border border-white/10 bg-gradient-to-br from-[#0B122E] to-[#1B223F] p-10 shadow-[0_20px_120px_rgba(0,212,255,0.08)]">
+                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400 mb-4">Stop Guessing. Build with Proof.
+                    </p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Be the founder who ships exactly what
+                        customers shout about.</h2>
+                    <p class="text-slate-400 mb-8 max-w-2xl mx-auto">Join PainScout.ai to intercept frustration-filled
+                        posts, quantify demand, and build the SaaS solution they can't ignore.</p>
+                    <a href="https://calendly.com/" target="_blank"
+                        class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition">
+                        🧭 Book a Signal Demo
+                    </a>
+                </div>
+            </section>
+
+            <footer class="px-6 md:px-12 lg:px-16 py-12 text-center text-sm text-slate-500">
+                PainScout.ai © <span x-data="{year: new Date().getFullYear()}" x-text="year"></span>. Built for SaaS
+                founders who listen.
+            </footer>
+        </main>
+    </div>
+</body>
+
+</html>

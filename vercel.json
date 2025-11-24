@@ -1,4 +1,14 @@
 {
+    "builds": [
+        {
+            "src": "landing/index.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "painscout/app.py",
+            "use": "@vercel/python"
+        }
+    ],
     "rewrites": [
         {
             "source": "/app",
